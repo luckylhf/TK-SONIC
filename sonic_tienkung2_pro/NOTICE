@@ -1,0 +1,35 @@
+SONIC TienKung2 Pro v1.3
+Copyright 2026 NVIDIA CORPORATION & AFFILIATES.
+TienKung2 Pro adaptation and compliance modifications Copyright 2026 luckylhf.
+
+This distribution is based on NVIDIA GR00T-WholeBodyControl / GEAR-SONIC.
+NVIDIA-origin source code is licensed under Apache License 2.0, and NVIDIA
+model weights are licensed under the NVIDIA Open Model License, except where
+individual files or component notices state otherwise.
+
+The directory decoupled_wbc/control/teleop/gui contains MakeHuman-derived
+code and is distributed under GNU Affero General Public License v3.0 or later.
+
+The RoboCasa-derived code under decoupled_wbc/dexmg/gr00trobocasa/robocasa
+is licensed under the MIT License. RoboCasa upstream assets are licensed under
+Creative Commons Attribution 4.0 International (CC BY 4.0), including the
+assets under models/assets/arenas/gear_factory/ and
+models/assets/objects/omniverse/locomanip/. See the third-party notice.
+
+The TienKung2 Pro robot description at out/assets/tienkung2_pro.xml and meshes
+under out/assets/tienkung2_pro/ are derived from Open-X-Humanoid/TienKung_URDF
+and are distributed under the OpenAtom Open Hardware License Version 1.0. See
+out/assets/TIENKUNG2_PRO_NOTICE.md.
+
+See legal/THIRD-PARTY SOFTWARE NOTICES AND ASSET LICENSES - GEAR-SONIC.txt
+and the component-specific license files under legal/ for complete details.
+
+Licensed by NVIDIA Corporation under the NVIDIA Open Model License
+
+Training data includes Motion Data by Bones Studio with a link to
+https://bones.studio/. Use of the underlying dataset is subject to the BONES
+Motion Capture Dataset License Agreement.
+
+All third-party trademarks and product names are the property of their
+respective owners. Their use identifies the relevant products or component
+origins and does not imply endorsement.

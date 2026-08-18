@@ -1,0 +1,334 @@
+# TienKung2 Pro adaptation; Copyright 2026 luckylhf.
+ROBOT_TYPE: 'tienkung2_pro'
+ROBOT_SCENE: "gear_sonic/data/assets/robot_description/mjcf/tienkung2_pro.xml"
+TORSO_LINK: "body_yaw_link"
+ROOT_BODY: "Base_link"
+
+ENABLE_ONSCREEN: False
+ENABLE_OFFSCREEN: False
+
+DOMAIN_ID: 0
+INTERFACE: "lo"
+SIMULATOR: "mujoco"
+
+USE_JOYSTICK: 0
+JOYSTICK_TYPE: "xbox"
+JOYSTICK_DEVICE: 0
+
+FREE_BASE: False
+
+PRINT_SCENE_INFORMATION: True
+ENABLE_ELASTIC_BAND: True
+
+SIMULATE_DT: 0.005
+VIEWER_DT: 0.02
+REWARD_DT: 0.02
+USE_SENSOR: False
+USE_HISTORY: True
+USE_HISTORY_LOCO: True
+USE_HISTORY_MIMIC: True
+
+GAIT_PERIOD: 0.9
+
+# MuJoCo DOF order (27 joints):
+#   0:    body_yaw
+#   1-7:  left arm  (shoulder_pitch/roll/yaw, elbow_pitch/yaw, wrist_pitch/roll)
+#   8-14: right arm (same)
+#   15-20: left leg  (hip_roll/pitch/yaw, knee_pitch, ankle_pitch/roll)
+#   21-26: right leg (same)
+MOTOR2JOINT: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+              15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+
+JOINT2MOTOR: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+              15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+
+UNITREE_LEGGED_CONST:
+  HIGHLEVEL: 0xEE
+  LOWLEVEL: 0xFF
+  TRIGERLEVEL: 0xF0
+  PosStopF: 2146000000.0
+  VelStopF: 16000.0
+  MODE_MACHINE: 5
+  MODE_PR: 0
+
+# Stiffness values from tienkung2_pro.py actuator configs
+JOINT_KP: [
+    200,                          # body_yaw
+    60, 20, 10, 10, 10, 5, 5,    # left arm
+    60, 20, 10, 10, 10, 5, 5,    # right arm
+    700, 700, 500, 700, 30, 15,  # left leg
+    700, 700, 500, 700, 30, 15   # right leg
+]
+
+# Damping values from tienkung2_pro.py actuator configs
+JOINT_KD: [
+    10,                              # body_yaw
+    3, 1.5, 1, 1, 1, 0.5, 0.5,     # left arm
+    3, 1.5, 1, 1, 1, 0.5, 0.5,     # right arm
+    20, 20, 15, 10, 1.25, 1.25,    # left leg
+    20, 20, 15, 10, 1.25, 1.25     # right leg
+]
+
+MOTOR_KP: [
+    200,                          # body_yaw
+    60, 20, 10, 10, 10, 5, 5,    # left arm
+    60, 20, 10, 10, 10, 5, 5,    # right arm
+    700, 700, 500, 700, 30, 15,  # left leg
+    700, 700, 500, 700, 30, 15   # right leg
+]
+
+MOTOR_KD: [
+    10,                              # body_yaw
+    3, 1.5, 1, 1, 1, 0.5, 0.5,     # left arm
+    3, 1.5, 1, 1, 1, 0.5, 0.5,     # right arm
+    20, 20, 15, 10, 1.25, 1.25,    # left leg
+    20, 20, 15, 10, 1.25, 1.25     # right leg
+]
+
+WeakMotorJointIndex:
+  body_yaw_joint: 0
+  shoulder_pitch_l_joint: 1
+  shoulder_roll_l_joint: 2
+  shoulder_yaw_l_joint: 3
+  elbow_pitch_l_joint: 4
+  elbow_yaw_l_joint: 5
+  wrist_pitch_l_joint: 6
+  wrist_roll_l_joint: 7
+  shoulder_pitch_r_joint: 8
+  shoulder_roll_r_joint: 9
+  shoulder_yaw_r_joint: 10
+  elbow_pitch_r_joint: 11
+  elbow_yaw_r_joint: 12
+  wrist_pitch_r_joint: 13
+  wrist_roll_r_joint: 14
+  hip_roll_l_joint: 15
+  hip_pitch_l_joint: 16
+  hip_yaw_l_joint: 17
+  knee_pitch_l_joint: 18
+  ankle_pitch_l_joint: 19
+  ankle_roll_l_joint: 20
+  hip_roll_r_joint: 21
+  hip_pitch_r_joint: 22
+  hip_yaw_r_joint: 23
+  knee_pitch_r_joint: 24
+  ankle_pitch_r_joint: 25
+  ankle_roll_r_joint: 26
+
+NUM_MOTORS: 27
+NUM_JOINTS: 27
+NUM_HAND_MOTORS: 0
+NUM_HAND_JOINTS: 0
+NUM_UPPER_BODY_JOINTS: 15
+
+# Default pose from tienkung2_pro.py init_state.joint_pos
+DEFAULT_DOF_ANGLES: [
+    0.0,   # body_yaw
+    0.0,   # shoulder_pitch_l
+    0.1,   # shoulder_roll_l
+    0.0,   # shoulder_yaw_l
+    -0.3,  # elbow_pitch_l
+    0.0,   # elbow_yaw_l
+    0.0,   # wrist_pitch_l
+    0.0,   # wrist_roll_l
+    0.0,   # shoulder_pitch_r
+    -0.1,  # shoulder_roll_r
+    0.0,   # shoulder_yaw_r
+    -0.3,  # elbow_pitch_r
+    0.0,   # elbow_yaw_r
+    0.0,   # wrist_pitch_r
+    0.0,   # wrist_roll_r
+    0.0,   # hip_roll_l
+    -0.5,  # hip_pitch_l
+    0.0,   # hip_yaw_l
+    1.0,   # knee_pitch_l
+    -0.5,  # ankle_pitch_l
+    0.0,   # ankle_roll_l
+    0.0,   # hip_roll_r
+    -0.5,  # hip_pitch_r
+    0.0,   # hip_yaw_r
+    1.0,   # knee_pitch_r
+    -0.5,  # ankle_pitch_r
+    0.0    # ankle_roll_r
+]
+
+DEFAULT_MOTOR_ANGLES: [
+    0.0,   # body_yaw
+    0.0,   # shoulder_pitch_l
+    0.1,   # shoulder_roll_l
+    0.0,   # shoulder_yaw_l
+    -0.3,  # elbow_pitch_l
+    0.0,   # elbow_yaw_l
+    0.0,   # wrist_pitch_l
+    0.0,   # wrist_roll_l
+    0.0,   # shoulder_pitch_r
+    -0.1,  # shoulder_roll_r
+    0.0,   # shoulder_yaw_r
+    -0.3,  # elbow_pitch_r
+    0.0,   # elbow_yaw_r
+    0.0,   # wrist_pitch_r
+    0.0,   # wrist_roll_r
+    0.0,   # hip_roll_l
+    -0.5,  # hip_pitch_l
+    0.0,   # hip_yaw_l
+    1.0,   # knee_pitch_l
+    -0.5,  # ankle_pitch_l
+    0.0,   # ankle_roll_l
+    0.0,   # hip_roll_r
+    -0.5,  # hip_pitch_r
+    0.0,   # hip_yaw_r
+    1.0,   # knee_pitch_r
+    -0.5,  # ankle_pitch_r
+    0.0    # ankle_roll_r
+]
+
+# Joint position limits from tienkung2_pro.xml
+motor_pos_lower_limit_list: [
+    -2.96706,                                                    # body_yaw
+    -2.96706, -1.0472, -2.96706, -2.61799, -2.96706, -0.785398, -1.65806,  # left arm
+    -2.96706, -1.8326, -2.96706, -2.61799, -2.96706, -0.785398, -1.309,    # right arm
+    -0.785398, -2.79253, -1.0472, 0.0, -1.22173, -0.523599,    # left leg
+    -0.785398, -2.79253, -1.0472, 0.0, -1.22173, -0.523599     # right leg
+]
+
+motor_pos_upper_limit_list: [
+    3.14159,                                                     # body_yaw
+    2.96706, 1.8326, 2.96706, 0.261799, 2.96706, 1.0472, 1.309,   # left arm
+    2.96706, 1.0472, 2.96706, 0.261799, 2.96706, 1.0472, 1.65806, # right arm
+    0.785398, 2.0944, 1.0472, 2.3911, 0.523599, 0.523599,      # left leg
+    0.785398, 2.0944, 1.0472, 2.3911, 0.523599, 0.523599       # right leg
+]
+
+# Velocity limits from tienkung2_pro.py actuator configs
+motor_vel_limit_list: [
+    5.0,                                                         # body_yaw
+    14.1, 14.1, 14.1, 14.1, 10.472, 7.540, 7.540,             # left arm
+    14.1, 14.1, 14.1, 14.1, 10.472, 7.540, 7.540,             # right arm
+    16.755, 15.707, 16.755, 15.707, 14.137, 14.137,            # left leg
+    16.755, 15.707, 16.755, 15.707, 14.137, 14.137             # right leg
+]
+
+# Effort limits from tienkung2_pro.py actuator configs
+motor_effort_limit_list: [
+    100.0,                                                       # body_yaw
+    52.5, 52.5, 52.5, 52.5, 24.0, 6.3, 6.3,                   # left arm
+    52.5, 52.5, 52.5, 52.5, 24.0, 6.3, 6.3,                   # right arm
+    235.0, 330.0, 235.0, 330.0, 55.0, 55.0,                   # left leg
+    235.0, 330.0, 235.0, 330.0, 55.0, 55.0                    # right leg
+]
+
+history_config: {
+    base_ang_vel: 4,
+    projected_gravity: 4,
+    command_lin_vel: 4,
+    command_ang_vel: 4,
+    command_base_height: 4,
+    command_stand: 4,
+    ref_upper_dof_pos: 4,
+    dof_pos: 4,
+    dof_vel: 4,
+    actions: 4,
+    ref_motion_phase: 4,
+    sin_phase: 4,
+    cos_phase: 4
+}
+
+history_loco_config: {
+    base_ang_vel: 4,
+    projected_gravity: 4,
+    command_lin_vel: 4,
+    command_ang_vel: 4,
+    command_stand: 4,
+    ref_upper_dof_pos: 4,
+    dof_pos: 4,
+    dof_vel: 4,
+    actions: 4,
+    sin_phase: 4,
+    cos_phase: 4
+}
+
+history_mimic_config: {
+    base_ang_vel: 4,
+    projected_gravity: 4,
+    dof_pos: 4,
+    dof_vel: 4,
+    actions: 4,
+    ref_motion_phase: 4,
+}
+
+obs_dims: {
+    base_lin_vel: 3,
+    base_ang_vel: 3,
+    projected_gravity: 3,
+    command_lin_vel: 2,
+    command_ang_vel: 1,
+    command_stand: 1,
+    command_base_height: 1,
+    ref_upper_dof_pos: 15,
+    dof_pos: 27,
+    dof_vel: 27,
+    actions: 27,
+    phase_time: 1,
+    ref_motion_phase: 1,
+    sin_phase: 1,
+    cos_phase: 1,
+}
+
+obs_loco_dims: {
+    base_lin_vel: 3,
+    base_ang_vel: 3,
+    projected_gravity: 3,
+    command_lin_vel: 2,
+    command_ang_vel: 1,
+    command_stand: 1,
+    command_base_height: 1,
+    ref_upper_dof_pos: 15,
+    dof_pos: 27,
+    dof_vel: 27,
+    actions: 12,
+    phase_time: 1,
+    sin_phase: 1,
+    cos_phase: 1,
+}
+
+obs_mimic_dims: {
+    base_lin_vel: 3,
+    base_ang_vel: 3,
+    projected_gravity: 3,
+    dof_pos: 27,
+    dof_vel: 27,
+    actions: 27,
+    ref_motion_phase: 1,
+}
+
+obs_scales: {
+    base_lin_vel: 2.0,
+    base_ang_vel: 0.25,
+    projected_gravity: 1.0,
+    command_lin_vel: 1,
+    command_ang_vel: 1,
+    command_stand: 1,
+    command_base_height: 2,
+    ref_upper_dof_pos: 1.0,
+    dof_pos: 1.0,
+    dof_vel: 0.05,
+    history: 1.0,
+    history_loco: 1.0,
+    history_mimic: 1.0,
+    actions: 1.0,
+    phase_time: 1.0,
+    ref_motion_phase: 1.0,
+    sin_phase: 1.0,
+    cos_phase: 1.0
+}
+
+# Upper body reference pose for locomotion (15 joints: waist + arms)
+loco_upper_body_dof_pos: [
+    0.0,                          # body_yaw
+    0.0, 0.1, 0.0, -0.3, 0.0, 0.0, 0.0,  # left arm
+    0.0, -0.1, 0.0, -0.3, 0.0, 0.0, 0.0  # right arm
+]
+
+robot_dofs: {
+    "tienkung2_pro": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+}

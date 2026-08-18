@@ -1,0 +1,10 @@
+foot_pos_local:
+  _target_: isaaclab.managers.TerminationTermCfg
+  func: gear_sonic.envs.manager_env.mdp:CummBodyPosErrorLocal
+  params:
+    command_name: "motion"
+    threshold: 0.35
+    min_steps: 3
+    body_names:
+      - "ankle_roll_l_link"
+      - "ankle_roll_r_link"

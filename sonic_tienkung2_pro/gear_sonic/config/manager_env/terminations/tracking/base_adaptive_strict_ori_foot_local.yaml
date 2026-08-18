@@ -1,0 +1,12 @@
+# Same as base_adaptive_strict_ori_foot_xyz but uses foot_pos_local (root-relative,
+# cumulative) instead of foot_pos_xyz (world-frame, single-step).
+# This decouples foot termination from root drift.
+
+defaults:
+  - terms/anchor_pos_adaptive@_here_
+  - terms/anchor_ori_full@_here_
+  - terms/ee_body_pos_adaptive@_here_
+  - terms/motion_time_out@_here_
+  - terms/foot_pos_local@_here_
+
+_target_: gear_sonic.envs.manager_env.mdp.terminations.TerminationsCfg

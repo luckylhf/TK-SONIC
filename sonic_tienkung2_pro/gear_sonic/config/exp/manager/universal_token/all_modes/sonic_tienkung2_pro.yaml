@@ -1,0 +1,197 @@
+# TienKung2 Pro adaptation; Copyright 2026 luckylhf.
+# @package _global_
+# SONIC Tienkung2 Pro config — 3 encoders (G1/motion tracking, teleop, SMPL).
+# Based on sonic_h2.yaml, adapted for Tienkung2 Pro (28 bodies, 27 DOF).
+# Body name differences from G1: _l/_r suffix instead of left_/right_ prefix,
+# body_yaw_link instead of torso_link, no wrist_yaw (use wrist_roll instead).
+
+defaults:
+  - /algo: ppo_im_phc
+  - /manager_env: base_env
+  - /callbacks/read_eval
+  - /callbacks/im_resample
+  - /aux_losses: universal_token/g1_recon_and_all_latent
+  - override /trainer: trl_ppo_aux
+  - override /actor_critic: universal_token/all_mlp_v1
+  - override /manager_env/observations/tokenizer: unitoken_all_noz
+  - override /manager_env/observations/policy: local_dir_hist
+  - override /manager_env/observations/critic: privileged_mf_hist
+  - override /manager_env/events: tracking/level0_4
+  - override /manager_env/terminations: tracking/base_adaptive_strict_ori_foot_local
+  - override /manager_env/rewards: tracking/base_5point_local_feet_acc
+
+use_manager_env: true
+
+exp_base: ${hydra:runtime.choices.exp}
+exp_var: test
+experiment_name: ${exp_base}_${exp_var}
+experiment_dir: ${base_dir}/${project_name}/${experiment_name}-${timestamp}
+
+num_envs: 8192
+project_name: TRL_Tienkung2Pro_Track
+
+actor_prop_history_length: 10
+actor_actions_history_length: 10
+
+critic_prop_history_length: 10
+critic_actions_history_length: 10
+
+use_wandb: false
+
+trainer:
+  # Linearly decay action noise ceiling from 0.5 → 0.1 over 50k steps.
+  # Policy explores freely early on, then converges to a more deterministic behaviour.
+  schedule_dict:
+    config@std_clamp_max:
+      type: linear
+      seg_steps: [0, 50000]
+      seg_vals: [0.5, 0.1]
+
+callbacks:
+  curriculum:
+    _target_: gear_sonic.trl.callbacks.curriculum_callback.CurriculumCallback
+    curriculum_cfg_path: gear_sonic/config/curriculum/tienkung2_pro_3stage.yaml
+  model_save:
+    save_frequency: 200
+
+manager_env:
+  observations:
+    tokenizer:
+      joint_pos_multi_future_wrist_for_smpl:
+        params:
+          joints_idx: [15, 16, 25, 26, 23, 24]  # elbow_pitch_l/r, wrist_roll_l/r, wrist_pitch_l/r (matches G1's elbow+wrist_roll+wrist_pitch)
+  rewards:
+    feet_acc:
+      weight: -2.5e-6
+    anti_shake_ang_vel:
+      params:
+        body_names: ["wrist_roll_l_link", "wrist_roll_r_link", "body_yaw_link"]
+    undesired_contacts:
+      params:
+        sensor_cfg:
+          body_names:
+            - "^(?!ankle_roll_l_link$)(?!ankle_roll_r_link$)(?!wrist_roll_l_link$)(?!wrist_roll_r_link$)(?!elbow_pitch_l_link$)(?!elbow_pitch_r_link$).+$"
+  terminations:
+    ee_body_pos:
+      params:
+        threshold: 0.30
+        body_names:
+          - "ankle_roll_l_link"
+          - "ankle_roll_r_link"
+    ee_body_pos_wrist:
+      _target_: isaaclab.managers.TerminationTermCfg
+      func: gear_sonic.envs.manager_env.mdp:exceeded_body_height
+      params:
+        command_name: "motion"
+        threshold: 0.55
+        body_names:
+          - "wrist_roll_l_link"
+          - "wrist_roll_r_link"
+    foot_pos_local:
+      params:
+        threshold: 0.35
+        min_steps: 3
+        body_names:
+          - "ankle_roll_l_link"
+          - "ankle_roll_r_link"
+    anchor_pos:
+      params:
+        threshold: 0.25    
+        down_threshold: 1.0
+    anchor_ori_full:
+      params:
+        threshold: 0.6    
+  events:
+    base_com:
+      params:
+        asset_cfg:
+          body_names: "body_yaw_link"
+    randomize_rigid_body_mass:
+      params:
+        asset_cfg:
+          body_names: ".*wrist_roll.*|body_yaw_link"
+  config:
+    robot:
+      type: tienkung2_pro
+    terrain_type: plane
+    episode_length_s: 5
+  commands:
+    motion:
+      reward_point_body: ["body_yaw_link", "wrist_roll_l_link", "wrist_roll_r_link"]
+      reward_point_body_offset: [[0.0, 0.0, 0.35], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+      vr_3point_body: ["wrist_roll_l_link", "wrist_roll_r_link", "body_yaw_link"]
+      vr_3point_body_offset: [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.35]]
+      body_names: [
+        "pelvis",
+        "hip_roll_l_link",
+        "knee_pitch_l_link",
+        "ankle_roll_l_link",
+        "hip_roll_r_link",
+        "knee_pitch_r_link",
+        "ankle_roll_r_link",
+        "body_yaw_link",
+        "shoulder_roll_l_link",
+        "elbow_pitch_l_link",
+        "wrist_roll_l_link",
+        "shoulder_roll_r_link",
+        "elbow_pitch_r_link",
+        "wrist_roll_r_link",
+      ]
+      num_future_frames: 10
+      dt_future_ref_frames: 0.1
+      smpl_num_future_frames: 10
+      smpl_dt_future_ref_frames: 0.02
+      cat_upper_body_poses: false
+      freeze_frame_aug: true
+      teleop_sample_prob_when_smpl: 0.5
+      motion_lib_cfg:
+        adaptive_sampling:
+          adp_samp_failure_rate_max_over_mean: 8
+          uniform_sampling_rate: 0.3
+        motion_file: data/motion_lib_tienkung2_pro/good
+        smpl_motion_file: data/smpl_filtered
+        smpl_y_up: true
+        asset:
+          assetFileName: "tienkung2_pro.xml"
+
+algo:
+  config:
+    empty_cache_every_n_ppo_epoch: -1
+    num_steps_per_env: 24
+    num_mini_batches: 4    
+    num_learning_epochs: 3 
+    use_clampped_std: true
+    std_clamp_min: 0.001
+    std_clamp_max: 0.5
+    max_grad_norm: 0.1
+    entropy_coef: 0.03
+    actor:
+      backbone:
+        reencode_smpl_g1_recon: true
+        encoders:
+          g1:
+            inputs: ["command_multi_future_nonflat", "motion_anchor_ori_b_mf_nonflat"]
+          teleop:
+            inputs:
+              [
+                "command_multi_future_lower_body",
+                "vr_3point_local_target",
+                "vr_3point_local_orn_target",
+                "motion_anchor_ori_b",
+              ]
+          smpl:
+            inputs:
+              [
+                "smpl_joints_multi_future_local_nonflat",
+                "smpl_root_ori_b_multi_future",
+                "joint_pos_multi_future_wrist_for_smpl",
+              ]
+        decoders:
+          g1_kin:
+            outputs: ["command_multi_future_nonflat", "motion_anchor_ori_b_mf_nonflat"]
+
+    critic:
+      backbone:
+        module_config_dict:
+          layer_config:
+            hidden_dims: [2048, 2048, 1024, 1024, 512, 512]

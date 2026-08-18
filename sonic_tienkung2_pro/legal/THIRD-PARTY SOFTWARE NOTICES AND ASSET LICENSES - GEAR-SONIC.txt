@@ -1,0 +1,148 @@
+THIRD-PARTY SOFTWARE NOTICES AND ASSET LICENSES
+-----------------------------------------------
+
+This distribution contains or depends on the components below. A component's
+own license controls that component; the repository-level LICENSE does not
+replace those terms.
+
+1. unitree_sdk2_python and unitree_sdk2 (C++)
+   Copyright Unitree Robotics / HangZhou YuShu TECHNOLOGY CO.,LTD.
+   License: BSD 3-Clause.
+   Bundled binary scope includes crc_*.so, libunitree_sdk2.a, libddsc.so,
+   and libddscxx.so for aarch64 and x86_64 where present.
+   Upstream: https://github.com/unitreerobotics/unitree_sdk2 and
+   https://github.com/unitreerobotics/unitree_sdk2_python. The source package
+   does not record the exact Unitree commit and this notice does not guess it.
+   Local text: gear_sonic_deploy/thirdparty/unitree_sdk2/LICENSE
+
+2. XRoboToolkit-PC-Service-Pybind
+   Copyright XR-Robotics. License: MIT.
+   The proprietary PICO library is not distributed and requires a separate
+   vendor license.
+
+3. robosuite and RoboCasa-derived code and assets
+   robosuite code: Copyright ARISE Initiative; Apache License 2.0.
+   RoboCasa v0.2 code: Copyright (c) 2024 the RoboCasa Team; MIT License.
+   RoboCasa upstream assets and datasets: Creative Commons Attribution 4.0
+   International (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/.
+   Upstream source: https://github.com/robocasa/robocasa/tree/v0.2.
+   The assets in this package may have been selected, converted, or reorganized
+   for gr00trobocasa; the history-free package does not record exact changes.
+   Local code texts: legal/Apache License - GEAR-SONIC.txt and
+   legal/MIT-RoboCasa.txt.
+   Scope: decoupled_wbc/dexmg/gr00trobocasa/robocasa/.
+   The assets under models/assets/arenas/gear_factory/ and
+   models/assets/objects/omniverse/locomanip/ are RoboCasa upstream assets and
+   are distributed under CC BY 4.0.
+
+4. tmux-plugins/tpm
+   Copyright tmux-plugins. License: MIT.
+
+5. BeyondMimic
+   Copyright HybridRobotics. License: MIT.
+
+6. Eclipse Cyclone DDS shared libraries bundled with unitree_sdk2
+   Copyright Eclipse Foundation. Licenses: EPL-2.0 and EDL-1.0.
+   Bundled versions: Cyclone DDS 0.10.2 and Cyclone DDS C++ 0.10.2.
+   Exact corresponding source:
+   https://github.com/eclipse-cyclonedds/cyclonedds/tree/0.10.2
+   https://github.com/eclipse-cyclonedds/cyclonedds-cxx/tree/0.10.2
+   Recipients may obtain that source under the license terms above.
+   Local texts: gear_sonic_deploy/thirdparty/unitree_sdk2/licenses/
+   eclipse-cyclonedds/
+
+7. Eclipse iceoryx bundled with unitree_sdk2
+   Copyright Eclipse Foundation. License: EPL-2.0.
+   Local texts: gear_sonic_deploy/thirdparty/unitree_sdk2/licenses/
+   eclipse-iceoryx/
+
+8. HuMoR / smplx body-model source code
+   Copyright Davis Rempe and contributors; Max Planck Institute contributors.
+   License: MIT for the applicable source code.
+   Local HuMoR text: legal/MIT-HuMoR.txt
+   SMPL/SMPL-X models and auxiliary assets are subject to separate terms and
+   are not distributed in SONIC v1.3. See RESTORE.md.
+
+9. GR00T-WholeBodyControl and GEAR-SONIC
+   Copyright NVIDIA CORPORATION & AFFILIATES.
+   Source license: Apache License 2.0. Model checkpoints and G1 demo ONNX
+   policies: NVIDIA Open Model License. The complete NVIDIA terms and required
+   attribution are in the repository LICENSE and NOTICE.
+   Apache text: legal/Apache License - GEAR-SONIC.txt
+   Upstream: https://github.com/NVlabs/GR00T-WholeBodyControl
+
+10. MakeHuman-derived teleoperation GUI
+    Copyright MakeHuman Team 2001-2020 and contributors.
+    License: GNU Affero General Public License v3.0 or later.
+    Scope: decoupled_wbc/control/teleop/gui/
+    Local text: legal/AGPL-3.0-or-later.txt
+    Component details: decoupled_wbc/control/teleop/gui/README-LICENSE.md
+
+11. PyQt6
+    Copyright Riverbank Computing Limited.
+    License: GPL v3 or a commercial Riverbank license. PyQt6 is an external
+    dependency and is not vendored in this distribution.
+    Local GPL text: legal/GPL-3.0.txt
+
+12. PyTorch3D rotation-conversion code
+    Copyright Meta Platforms, Inc. and affiliates.
+    License: BSD 3-Clause.
+    Local text: legal/BSD-3-Clause-PyTorch3D.txt
+
+13. Isaac Lab-derived terrain code
+    Copyright NVIDIA CORPORATION & AFFILIATES.
+    License: BSD 3-Clause.
+    Local text: legal/BSD-3-Clause-IsaacLab.txt
+
+14. Willow Garage / ROS cv_bridge-derived code
+    Copyright Willow Garage, Inc.
+    License: BSD 3-Clause. The copyright and license notice is retained in
+    decoupled_wbc/control/utils/cv_bridge.py.
+
+15. Google DeepMind / MuJoCo USD utilities
+    Copyright Google DeepMind and contributors.
+    License: Apache License 2.0. Notices are retained in
+    decoupled_wbc/dexmg/gr00trobocasa/robocasa/utils/usd/.
+    Local text: legal/Apache License - GEAR-SONIC.txt
+
+16. TienKung2 Pro robot-description assets
+    Upstream: Open-X-Humanoid/TienKung_URDF.
+    License: OpenAtom Open Hardware License Version 1.0.
+    Local text: legal/OpenAtom-Open-Hardware-License-1.0.txt
+    Asset and modification notice: out/assets/TIENKUNG2_PRO_NOTICE.md
+
+17. UltraLeap hand-tracking software
+    UltraLeap software is obtained separately from the vendor and is governed
+    by the vendor EULA. It is not bundled in this distribution. The installer
+    intentionally requires the user to review and accept that EULA.
+
+18. BONES-SEED-derived MotionBricks normalization statistics
+    Files: motionbricks/out/*/version_1/stats/motion/mean.npy and std.npy.
+    These small statistical Results were computed over MotionBricks training
+    data; raw BONES-SEED motion data is not included. Use of the underlying
+    dataset is subject to the BONES Motion Capture Dataset License Agreement:
+    https://huggingface.co/datasets/bones-studio/seed/blob/main/LICENSE.md
+    Required attribution: "Training data includes Motion Data by Bones Studio
+    with a link to https://bones.studio/. Use of the underlying dataset is
+    subject to the BONES Motion Capture Dataset License Agreement."
+
+19. Documentation images and videos
+    Scope: media/ and docs/source/_static/.
+    Most media arrived with the NVIDIA upstream source package. This source
+    package does not record the creator and original authorization for every
+    image, screenshot, GIF, or video. PICO setup media contains third-party UI
+    and product marks and is retained only in docs/source/_static/pico_setup/;
+    its use is descriptive and does not imply endorsement. Before publishing
+    these media independently or using them for marketing, confirm the original
+    source and authorization or remove the affected files.
+
+20. Test replay and trajectory fixtures
+    Scope: decoupled_wbc/tests/replay_data/*.pkl and
+    decoupled_wbc/tests/control/policy/interpolation_policy/trajectory_data.npy.
+    These fixtures arrived in the NVIDIA upstream source package and are treated
+    as NVIDIA-origin test materials under Apache License 2.0. The history-free
+    package does not identify their individual creator or source commit; retain
+    them only with the upstream copyright and license notices in this package.
+
+This notice is informational and is not legal advice. Downstream distributors
+must comply with every applicable component license and any gated-data terms.

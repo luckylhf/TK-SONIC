@@ -1,0 +1,72 @@
+# TienKung2 Pro adaptation; Copyright 2026 luckylhf.
+# 课程学习配置 — TienKung2 Pro 低动态3阶段
+# 目标：训练站立、行走、日常低幅度动作（约53,000个）
+# 升级条件严格，确保每阶段充分掌握
+
+stages:
+  - name: "纯站立"
+    filter_patterns:
+      - "neutral_idle.*"
+      - "idle_loop.*"
+      - "inj_.*_idle.*"
+      - "stand.*"
+    upgrade_timeout_ratio: 0.88
+    upgrade_hold_steps: 100
+
+  - name: "站立行走"
+    filter_patterns:
+      - "neutral_idle.*"
+      - "idle_loop.*"
+      - "inj_.*_idle.*"
+      - "stand.*"
+      - "walk_ff.*"
+      - "walk_sideway.*"
+      - "slow_walk.*"
+      - "neutral_walk.*"
+      - "arc_walk.*"
+      - "change_idle.*"
+    upgrade_timeout_ratio: 0.90
+    upgrade_hold_steps: 100
+
+  - name: "全部低动态"
+    # 全量数据，排除高幅度动作
+    filter_patterns: []
+    exclude_patterns:
+      - "jump.*"
+      - "danc.*"
+      - "flip.*"
+      - "high_jump.*"
+      - "turn_jump.*"
+      - "reach_jump.*"
+      - "acro.*"
+      - "cartwheel.*"
+      - "somersault.*"
+      - "jog.*"
+      - "run.*"
+      - "sprint.*"
+      - "ab_bicycle.*"
+      - "balled_up.*"
+      - "kneeling_start.*"
+      - "sitting.*"
+      - "lying.*"
+      - "crawl.*"
+      - "fall.*"
+      - "stumble.*"
+      - "drunk.*"
+      - "injured.*"
+      - "inj_.*_walk.*"
+      - "inj_.*_jog.*"
+      - "inj_.*_run.*"
+      - "inj_.*_jump.*"
+      - "turn_jog.*"
+      - ".*_jog_.*"
+      - ".*_danc.*"
+      - ".*_jump_.*"
+      - "Jump.*"
+      - "ROM.*"
+      - ".*__A18[4-8].*"
+      - ".*__A23[4-8].*"
+      - ".*__A25[5-7].*"
+      - ".*__A54[2-5].*"
+    upgrade_ep_len: null
+    upgrade_hold_steps: 0
