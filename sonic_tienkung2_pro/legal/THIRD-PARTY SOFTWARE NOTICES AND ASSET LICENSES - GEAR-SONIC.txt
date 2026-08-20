@@ -42,7 +42,9 @@ replace those terms.
    Copyright HybridRobotics. License: MIT.
 
 6. Eclipse Cyclone DDS shared libraries bundled with unitree_sdk2
-   Copyright Eclipse Foundation. Licenses: EPL-2.0 and EDL-1.0.
+   Copyright Eclipse Foundation. License choice: EPL-2.0 OR EDL-1.0.
+   For this distribution, files offering that choice are redistributed under
+   EDL-1.0 (identified as BSD-3-Clause in their SPDX headers).
    Bundled versions: Cyclone DDS 0.10.2 and Cyclone DDS C++ 0.10.2.
    Exact corresponding source:
    https://github.com/eclipse-cyclonedds/cyclonedds/tree/0.10.2
@@ -51,10 +53,12 @@ replace those terms.
    Local texts: gear_sonic_deploy/thirdparty/unitree_sdk2/licenses/
    eclipse-cyclonedds/
 
-7. Eclipse iceoryx bundled with unitree_sdk2
-   Copyright Eclipse Foundation. License: EPL-2.0.
-   Local texts: gear_sonic_deploy/thirdparty/unitree_sdk2/licenses/
-   eclipse-iceoryx/
+7. Eclipse iceoryx license material included with unitree_sdk2
+   Copyright Eclipse Foundation. License: Apache License 2.0.
+   No separately identifiable iceoryx library or source component was found
+   in this distribution. The license file is retained as part of the upstream
+   unitree_sdk2 package at gear_sonic_deploy/thirdparty/unitree_sdk2/licenses/
+   eclipse-iceoryx/.
 
 8. HuMoR / smplx body-model source code
    Copyright Davis Rempe and contributors; Max Planck Institute contributors.

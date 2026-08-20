@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Derived from MakeHuman code licensed under AGPL-3.0-or-later.
+# Modified for SONIC integration before 2026-08-18; the exact historical
+# modification date is unavailable. Compliance notice added on 2026-08-18.
 
 """
 Translation and localization module.
